@@ -1,0 +1,27 @@
+t1<-Sys.time()#計算程式碼跑的時間用
+#lucky為你簽的樂透號碼
+lucky=sort(c(4,7,8,12,28,31))
+#times為購買的次數
+times=0
+#cost為買一次大樂透所花的錢(50元一次)
+cost=50
+#total為最後的損益為多少
+total=0
+#result為每期開獎的結果
+result=sort(sample(1:49,6))
+while(sum(lucky==result)<6){
+  times=times+1
+  total=total-cost
+  if(sum(lucky==result)==3)
+  {total=total+200}
+  if(sum(lucky==result)==4)
+  {total=total+100000}
+  if(sum(lucky==result)==5)
+  {total=total+3000000}
+  result=sort(sample(1:49,6))
+}
+total=total+1000000000###因為中獎後while就停止了，要再加中頭獎的錢
+t2<-Sys.time()#計算程式碼跑的時間用
+cat("你總共買了",times,"次才得頭獎\n",sep="")
+cat("最後損益為",total,"元\n",sep="")
+print(t2-t1)#程式碼跑的時間
